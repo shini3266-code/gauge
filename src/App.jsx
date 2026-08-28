@@ -28,18 +28,6 @@ const SAMPLE = [
   { ticker: "AAPL", name: "Apple Inc.", sector: "Mega Cap", price: 228.4, prevClose: 231.1, bear: 190, base: 220, target: 260, expiration: "2026-12-15" },
   { ticker: "NVDA", name: "NVIDIA Corp.", sector: "Semis", price: 118.2, prevClose: 116.9, bear: 95, base: 110, target: 150, expiration: "2026-09-30" },
   { ticker: "TSLA", name: "Tesla Inc.", sector: "Auto", price: 402.5, prevClose: 388.0, bear: 180, base: 260, target: 320, expiration: "2026-09-05" },
-  { ticker: "META", name: "Meta Platforms", sector: "Mega Cap", price: 570.05, prevClose: 559.0, bear: 430, base: 520, target: 575, expiration: "2026-10-20" },
-  { ticker: "PLTR", name: "Palantir Tech.", sector: "Software", price: 41.2, prevClose: 44.8, bear: 45, base: 60, target: 80, expiration: "2026-08-20" },
-  { ticker: "MSFT", name: "Microsoft Corp.", sector: "Mega Cap", price: 468.0, prevClose: 465.2, bear: 400, base: 450, target: 520, expiration: "2026-11-30" },
-  { ticker: "AMZN", name: "Amazon.com", sector: "E-commerce", price: 231.5, prevClose: 229.9, bear: 180, base: 210, target: 260, expiration: "2026-12-31" },
-  { ticker: "GOOGL", name: "Alphabet Inc.", sector: "Mega Cap", price: 205.3, prevClose: 202.1, bear: 160, base: 190, target: 230, expiration: "2027-01-15" },
-  { ticker: "AMD", name: "Advanced Micro Devices", sector: "Semis", price: 172.4, prevClose: 178.0, bear: 140, base: 165, target: 200, expiration: "2026-09-10" },
-  { ticker: "RKLB", name: "Rocket Lab USA", sector: "Space", price: 66.91, prevClose: 68.3, bear: 45, base: 60, target: 85, expiration: "2026-10-05" },
-  { ticker: "ASTS", name: "AST SpaceMobile", sector: "Space", price: 62.01, prevClose: 62.35, bear: 40, base: 58, target: 78, expiration: "2026-11-01" },
-  { ticker: "COIN", name: "Coinbase Global", sector: "Crypto", price: 289.0, prevClose: 301.4, bear: 220, base: 270, target: 340, expiration: "2026-09-25" },
-  { ticker: "NFLX", name: "Netflix Inc.", sector: "Media", price: 1150.0, prevClose: 1128.0, bear: 950, base: 1050, target: 1250, expiration: "2027-02-28" },
-  { ticker: "AVGO", name: "Broadcom Inc.", sector: "Semis", price: 302.0, prevClose: 299.5, bear: 250, base: 285, target: 330, expiration: "2026-12-01" },
-  { ticker: "SOFI", name: "SoFi Technologies", sector: "Fintech", price: 24.1, prevClose: 25.6, bear: 18, base: 22, target: 30, expiration: "2026-08-25" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -330,7 +318,7 @@ function DistributionChart({ items }) {
         ))}
       </div>
 
-      <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height: 140, marginTop: 22 }}>
+      <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height: 200, marginTop: 22 }}>
         {bins.map((bin, i) => (
           <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column-reverse", alignItems: "center", gap: 3 }}>
             {bin.map((it, j) => (
