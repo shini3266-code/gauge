@@ -216,7 +216,7 @@ function SummaryHeader({ items }) {
       >
         <div style={{ fontSize: 12, color: "#6B7686", letterSpacing: 1, fontWeight: 600 }}>TRACKED UNIVERSE</div>
         <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginTop: 8 }}>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 34, fontWeight: 700, color: "#E8ECF1" }}>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 30, fontWeight: 700, color: "#E8ECF1" }}>
             {items.length}
           </span>
           <span style={{ fontSize: 14, color: "#8A93A3" }}>Stocks</span>
@@ -257,7 +257,7 @@ function SummaryHeader({ items }) {
               <div
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 26,
+                  fontSize: 22,
                   fontWeight: 700,
                   color: "#E8ECF1",
                   marginTop: 8,
@@ -444,7 +444,7 @@ function Card({ item }) {
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
         <div>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 19, color: "#E8ECF1" }}>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 17, color: "#E8ECF1" }}>
             {item.ticker}
           </span>
           {exp && (
@@ -477,7 +477,7 @@ function Card({ item }) {
       </div>
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: 14 }}>
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 30, fontWeight: 700, color: "#E8ECF1" }}>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 20, fontWeight: 700, color: "#E8ECF1" }}>
           ${item.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
         </span>
         <span
