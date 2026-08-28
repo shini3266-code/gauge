@@ -172,15 +172,15 @@ function formatExpiration(expiration) {
 
 const EXPIRATION_TONE_COLOR = {
   normal: "#6B7686",
-  warning: "#E3D0B1",
-  expired: "#DEB1B4",
+  warning: "#E8D1A9",
+  expired: "#EDB4B7",
 };
 
 const STATUS_STYLE = {
-  DOWN: { color: "#DEB1B4", bg: "rgba(240,97,107,0.12)", label: "DOWN", Icon: ArrowDownCircle },
-  IN: { color: "#ABB7D1", bg: "rgba(127,168,255,0.12)", label: "IN", Icon: CircleDot },
-  UP: { color: "#E3D0B1", bg: "rgba(242,176,74,0.12)", label: "UP", Icon: ArrowUpCircle },
-  HIT: { color: "#93C9AF", bg: "rgba(79,216,151,0.12)", label: "HIT", Icon: Flag },
+  DOWN: { color: "#EDB4B7", bg: "rgba(240,97,107,0.12)", label: "DOWN", Icon: ArrowDownCircle },
+  IN: { color: "#ACBEE6", bg: "rgba(127,168,255,0.12)", label: "IN", Icon: CircleDot },
+  UP: { color: "#E8D1A9", bg: "rgba(242,176,74,0.12)", label: "UP", Icon: ArrowUpCircle },
+  HIT: { color: "#8FC9AD", bg: "rgba(79,216,151,0.12)", label: "HIT", Icon: Flag },
 };
 
 function gaugeRange(bear, base, target) {
@@ -210,7 +210,7 @@ function SummaryHeader({ items }) {
           background: "#10151D",
           border: "1px solid rgba(255,255,255,0.06)",
           borderRadius: 16,
-          padding: "18px 20px",
+          padding: "15px 20px",
           marginBottom: 10,
         }}
       >
@@ -235,7 +235,7 @@ function SummaryHeader({ items }) {
                 background: "#10151D",
                 border: "1px solid rgba(255,255,255,0.06)",
                 borderRadius: 16,
-                padding: "16px 18px",
+                padding: "14px 18px",
               }}
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -378,14 +378,14 @@ function GaugeBar({ price, bear, base, target }) {
           borderRadius: 999,
           background: `linear-gradient(
             to right,
-            #DEB1B4 0%,
-            #DEB1B4 ${bearPct}%,
-            #ABB7D1 ${bearPct}%,
-            #ABB7D1 ${basePct}%,
-            #E3D0B1 ${basePct}%,
-            #E3D0B1 ${targetPct}%,
-            #93C9AF ${targetPct}%,
-            #93C9AF 100%
+            #EDB4B7 0%,
+            #EDB4B7 ${bearPct}%,
+            #ACBEE6 ${bearPct}%,
+            #ACBEE6 ${basePct}%,
+            #E8D1A9 ${basePct}%,
+            #E8D1A9 ${targetPct}%,
+            #8FC9AD ${targetPct}%,
+            #8FC9AD 100%
           )`,
           opacity: 0.9,
         }}
@@ -439,7 +439,7 @@ function Card({ item }) {
         background: "#10151D",
         border: "1px solid rgba(255,255,255,0.06)",
         borderRadius: 16,
-        padding: "18px 20px",
+        padding: "15px 20px",
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
@@ -488,7 +488,7 @@ function Card({ item }) {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 13,
             fontWeight: 600,
-            color: isUp ? "#93C9AF" : "#DEB1B4",
+            color: isUp ? "#8FC9AD" : "#EDB4B7",
           }}
         >
           {isUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
@@ -584,7 +584,7 @@ export default function Dashboard() {
                 width: 34,
                 height: 34,
                 borderRadius: 9,
-                background: "#ABB7D1",
+                background: "#ACBEE6",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -594,7 +594,7 @@ export default function Dashboard() {
             >
               T
             </div>
-            <span style={{ color: "#E8ECF1", fontWeight: 700, fontSize: 18, letterSpacing: 0.3 }}>
+            <span style={{ color: "#E8ECF1", fontWeight: 600, fontSize: 10, letterSpacing: 0.3 }}>
               TARGETBOARD
             </span>
           </div>
@@ -637,7 +637,7 @@ export default function Dashboard() {
               gap: 6,
               background: "rgba(240,97,107,0.1)",
               border: "1px solid rgba(240,97,107,0.3)",
-              color: "#DEB1B4",
+              color: "#EDB4B7",
               borderRadius: 12,
               padding: "12px 14px",
               fontSize: 12,
