@@ -13,7 +13,8 @@ import { RefreshCw, TrendingUp, TrendingDown, ArrowDownCircle, CircleDot, ArrowU
 // 시트의 첫 번째 행(헤더)에는 아래 컬럼명 중 하나를 사용하면 됩니다 (대소문자 무관):
 //   ticker, name, sector, price, prevClose, bear, base, target, expiration
 //   (한글 헤더도 지원: 종목코드, 종목명, 섹터, 현재가, 전일종가, bear, base, target, 만기일)
-const SHEET_CSV_URL = import.meta.env.VITE_SHEET_CSV_URL || "";
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlUzBC5duSaGr7nI63OpO_Eo9OOM47iozDijimc124jayJHkAtyiOwqlSmYiw-QTh05ZkqOlZM1n-b/pub?gid=1451151836&single=true&output=csv
+";
 const AUTO_REFRESH_MS = 5 * 60 * 1000; // 5분마다 자동 갱신
 
 // ---------------------------------------------------------------------------
