@@ -172,15 +172,15 @@ function formatExpiration(expiration) {
 
 const EXPIRATION_TONE_COLOR = {
   normal: "#6B7686",
-  warning: "#F2B04A",
-  expired: "#F0616B",
+  warning: "#E3D0B1",
+  expired: "#DEB1B4",
 };
 
 const STATUS_STYLE = {
-  DOWN: { color: "#F0616B", bg: "rgba(240,97,107,0.12)", label: "DOWN", Icon: ArrowDownCircle },
-  IN: { color: "#7FA8FF", bg: "rgba(127,168,255,0.12)", label: "IN", Icon: CircleDot },
-  UP: { color: "#F2B04A", bg: "rgba(242,176,74,0.12)", label: "UP", Icon: ArrowUpCircle },
-  HIT: { color: "#4FD897", bg: "rgba(79,216,151,0.12)", label: "HIT", Icon: Flag },
+  DOWN: { color: "#DEB1B4", bg: "rgba(240,97,107,0.12)", label: "DOWN", Icon: ArrowDownCircle },
+  IN: { color: "#ABB7D1", bg: "rgba(127,168,255,0.12)", label: "IN", Icon: CircleDot },
+  UP: { color: "#E3D0B1", bg: "rgba(242,176,74,0.12)", label: "UP", Icon: ArrowUpCircle },
+  HIT: { color: "#93C9AF", bg: "rgba(79,216,151,0.12)", label: "HIT", Icon: Flag },
 };
 
 function gaugeRange(bear, base, target) {
@@ -378,14 +378,14 @@ function GaugeBar({ price, bear, base, target }) {
           borderRadius: 999,
           background: `linear-gradient(
             to right,
-            #F0616B 0%,
-            #F0616B ${bearPct}%,
-            #7FA8FF ${bearPct}%,
-            #7FA8FF ${basePct}%,
-            #F2B04A ${basePct}%,
-            #F2B04A ${targetPct}%,
-            #4FD897 ${targetPct}%,
-            #4FD897 100%
+            #DEB1B4 0%,
+            #DEB1B4 ${bearPct}%,
+            #ABB7D1 ${bearPct}%,
+            #ABB7D1 ${basePct}%,
+            #E3D0B1 ${basePct}%,
+            #E3D0B1 ${targetPct}%,
+            #93C9AF ${targetPct}%,
+            #93C9AF 100%
           )`,
           opacity: 0.9,
         }}
@@ -488,7 +488,7 @@ function Card({ item }) {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 13,
             fontWeight: 600,
-            color: isUp ? "#4FD897" : "#F0616B",
+            color: isUp ? "#93C9AF" : "#DEB1B4",
           }}
         >
           {isUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
@@ -584,7 +584,7 @@ export default function Dashboard() {
                 width: 34,
                 height: 34,
                 borderRadius: 9,
-                background: "#7FA8FF",
+                background: "#ABB7D1",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -637,7 +637,7 @@ export default function Dashboard() {
               gap: 6,
               background: "rgba(240,97,107,0.1)",
               border: "1px solid rgba(240,97,107,0.3)",
-              color: "#F0616B",
+              color: "#DEB1B4",
               borderRadius: 12,
               padding: "12px 14px",
               fontSize: 12,
