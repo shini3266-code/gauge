@@ -554,11 +554,26 @@ export default function Dashboard() {
 
   // 시트(bear/base/target 등)와 야후 실시간 시세(price/prevClose)를 합침.
   // 야후 조회가 실패한 종목은 시트에 값이 있으면 그걸로, 없으면 0으로 fallback.
-  .sort((a, b) => {
-  const da = a.expiration ? new Date(a.expiration).getTime() : Infinity;
-  const db = b.expiration ? new Date(b.expiration).getTime() : Infinity;
-  return da - db;
-})
+  // 시트(bear/base/target 등)와 야후 실시간 시세(price/prevClose)를 합침.
+  // 야후 조회가 실패한 종목은 시트에 값이 있으면 그걸로, 없으면 0으로 fallback.
+  const items = useMemo(
+    () =>
+      baseItems
+        .map((it) => {
+          const live = quoteMap[it.ticker];
+          return {
+            ...it,
+            price: live?.price ?? it.price ?? 0,
+            prevClose: live?.prevClose ?? it.prevClose ?? it.price ?? 0,
+          };
+        })
+        .sort((a, b) => {
+          const da = a.expiration ? new Date(a.expiration).getTime() : Infinity;
+          const db = b.expiration ? new Date(b.expiration).getTime() : Infinity;
+          return da - db;
+        }),
+    [baseItems, quoteMap]
+  );
 
   return (
     <div
