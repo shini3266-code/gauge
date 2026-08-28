@@ -17,7 +17,7 @@ import { RefreshCw, TrendingUp, TrendingDown, ArrowDownCircle, CircleDot, ArrowU
 //   (price/prevClose는 이제 필수 아님 — 야후 파이낸스에서 자동으로 가져옵니다.
 //    야후 조회가 실패할 때만 시트 값이 있으면 fallback으로 사용됩니다.)
 //   (한글 헤더도 지원: 종목코드, 종목명, 섹터, 만기일)
-const HARDCODED_SHEET_CSV_URL = ""; // 필요하면 여기에 CSV 링크를 직접 붙여넣으세요 (한 줄로!)
+const HARDCODED_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlUzBC5duSaGr7nI63OpO_Eo9OOM47iozDijimc124jayJHkAtyiOwqlSmYiw-QTh05ZkqOlZM1n-b/pub?gid=1451151836&single=true&output=csv"; // 필요하면 여기에 CSV 링크를 직접 붙여넣으세요 (한 줄로!)
 const SHEET_CSV_URL = (import.meta.env.VITE_SHEET_CSV_URL || HARDCODED_SHEET_CSV_URL || "").trim();
 const AUTO_REFRESH_MS = 5 * 60 * 1000; // 5분마다 자동 갱신 (시트 + 시세 둘 다)
 
