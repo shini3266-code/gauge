@@ -512,7 +512,9 @@ export default function Dashboard() {
   const [sheetError, setSheetError] = useState(null);
   const [quoteError, setQuoteError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("expiration_asc");
+  
   const loadData = useCallback(async () => {
     setSpinning(true);
     setSheetError(null);
@@ -554,26 +556,55 @@ export default function Dashboard() {
 
   // 시트(bear/base/target 등)와 야후 실시간 시세(price/prevClose)를 합침.
   // 야후 조회가 실패한 종목은 시트에 값이 있으면 그걸로, 없으면 0으로 fallback.
-  // 시트(bear/base/target 등)와 야후 실시간 시세(price/prevClose)를 합침.
-  // 야후 조회가 실패한 종목은 시트에 값이 있으면 그걸로, 없으면 0으로 fallback.
   const items = useMemo(
     () =>
-      baseItems
-        .map((it) => {
-          const live = quoteMap[it.ticker];
-          return {
-            ...it,
-            price: live?.price ?? it.price ?? 0,
-            prevClose: live?.prevClose ?? it.prevClose ?? it.price ?? 0,
-          };
-        })
-        .sort((a, b) => {
-          const da = a.expiration ? new Date(a.expiration).getTime() : Infinity;
-          const db = b.expiration ? new Date(b.expiration).getTime() : Infinity;
-          return da - db;
-        }),
+      baseItems.map((it) => {
+        const live = quoteMap[it.ticker];
+        return {
+          ...it,
+          price: live?.price ?? it.price ?? 0,
+          prevClose: live?.prevClose ?? it.prevClose ?? it.price ?? 0,
+        };
+      }),
     [baseItems, quoteMap]
   );
+
+  // 검색어(티커)로 필터링하고, 선택한 정렬 기준으로 정렬한 목록.
+  // SummaryHeader/DistributionChart는 전체 items를 그대로 쓰고,
+  // 카드 목록만 이 visibleItems를 사용합니다.
+  function getExpTime(it, missingValue) {
+    if (!it.expiration) return missingValue;
+    const t = new Date(it.expiration).getTime();
+    return Number.isNaN(t) ? missingValue : t;
+  }
+
+  const visibleItems = useMemo(() => {
+    const query = searchQuery.trim().toUpperCase();
+    const filtered = query
+      ? items.filter((it) => it.ticker.toUpperCase().includes(query))
+      : items;
+
+    const withScore = filtered.map((it) => ({
+      ...it,
+      _score: bandScore(it.price, it.bear, it.base, it.target),
+    }));
+
+    withScore.sort((a, b) => {
+      switch (sortBy) {
+        case "expiration_desc":
+          return getExpTime(b, -Infinity) - getExpTime(a, -Infinity);
+        case "gauge_desc":
+          return b._score - a._score;
+        case "gauge_asc":
+          return a._score - b._score;
+        case "expiration_asc":
+        default:
+          return getExpTime(a, Infinity) - getExpTime(b, Infinity);
+      }
+    });
+
+    return withScore;
+  }, [items, searchQuery, sortBy]);
 
   return (
     <div
@@ -670,10 +701,53 @@ export default function Dashboard() {
         <SummaryHeader items={items} />
         <DistributionChart items={items} />
 
+        <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="티커 검색 (예: AAPL)"
+            style={{
+              flex: 1,
+              background: "#10151D",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: 10,
+              padding: "10px 12px",
+              color: "#E8ECF1",
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 13,
+              outline: "none",
+            }}
+          />
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            style={{
+              background: "#10151D",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: 10,
+              padding: "10px 12px",
+              color: "#E8ECF1",
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 12,
+              outline: "none",
+            }}
+          >
+            <option value="expiration_asc">만기 빠른순</option>
+            <option value="expiration_desc">만기 늦은순</option>
+            <option value="gauge_desc">밴드 위치 높은순</option>
+            <option value="gauge_asc">밴드 위치 낮은순</option>
+          </select>
+        </div>
+
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          {items.map((item) => (
-            <Card key={item.ticker} item={item} />
-          ))}
+          {visibleItems.length === 0 ? (
+            <div style={{ textAlign: "center", color: "#6B7686", fontSize: 13, padding: "24px 0" }}>
+              검색 결과가 없습니다.
+            </div>
+          ) : (
+            visibleItems.map((item) => <Card key={item.ticker} item={item} />)
+          )}
         </div>
       </div>
     </div>
